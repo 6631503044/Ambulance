@@ -1,4 +1,4 @@
-package com.pbt.ambulance_app;
+package com.pbt.ambulance_app.model;
 
 import org.hibernate.annotations.GeneratorType;
 
