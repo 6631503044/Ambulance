@@ -11,5 +11,4 @@ import com.pbt.ambulance_app.model.Login;
 public interface LoginRepository  extends CrudRepository<Login, String>{
 
    Login findByUsername(String username);
-
 }

@@ -23,11 +23,10 @@ public class LoginController {
     @PostMapping
     public String LoginCheck(@RequestBody Login login) {
 
-        if(login.getUsername()!=null && login.getPassword().equals(loginrepo.findByUsername(login.getUsername()).getPassword())){
+        if(login.getUsername() != null && loginrepo.findByUsername(login.getUsername()) != null && login.getPassword().equals(loginrepo.findByUsername(login.getUsername()).getPassword())) {
             return "Password correct";
-        }else{
-        return "Password or Username incorrect";}
+        } else {
+            return "Password or Username incorrect";
+        }
     }
-
-
-    }
+}
