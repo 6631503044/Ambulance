@@ -7,7 +7,7 @@ import com.pbt.ambulance_app.model.Patient;
 
 
 @Repository
-public interface PatientRepository  extends CrudRepository<Patient, String>{
+public interface PatientRepository  extends CrudRepository<Patient, Integer>{
    Patient findByHN(int HN);
    List<Patient> findByGender(String gender);
    List<Patient> findByPatient_Status_Id(int patient_Status_Id);

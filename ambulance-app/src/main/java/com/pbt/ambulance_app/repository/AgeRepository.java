@@ -8,7 +8,7 @@ import com.pbt.ambulance_app.model.Age;
 
 
 @Repository
-public interface AgeRepository  extends CrudRepository<Integer, String>{
+public interface AgeRepository  extends CrudRepository<Age, Integer>{
 
     Age findByAge_Id(int age_Id);
     

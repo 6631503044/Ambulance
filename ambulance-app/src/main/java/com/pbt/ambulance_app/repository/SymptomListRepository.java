@@ -7,6 +7,6 @@ import com.pbt.ambulance_app.model.SymptomList;
 
 
 @Repository
-public interface SymptomListRepository  extends CrudRepository<SymptomList, String>{
+public interface SymptomListRepository  extends CrudRepository<SymptomList, Integer>{
    SymptomList findBySymptom_Id(int symptom_Id);
 }

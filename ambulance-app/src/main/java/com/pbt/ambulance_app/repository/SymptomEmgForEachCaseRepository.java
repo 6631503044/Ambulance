@@ -7,6 +7,6 @@ import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 
 
 @Repository
-public interface SymptomEmgForEachCaseRepository  extends CrudRepository<SymptomEmgForEachCase, String>{
+public interface SymptomEmgForEachCaseRepository  extends CrudRepository<SymptomEmgForEachCase, Integer>{
    SymptomEmgForEachCase findBySymptom_Id(int symptom_Id);
 }

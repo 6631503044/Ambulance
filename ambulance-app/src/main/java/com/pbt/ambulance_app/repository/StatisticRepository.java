@@ -7,7 +7,7 @@ import com.pbt.ambulance_app.model.Statistic;
 
 
 @Repository
-public interface StatisticRepository  extends CrudRepository<Statistic, String>{
+public interface StatisticRepository  extends CrudRepository<Statistic, Integer>{
    Statistic findByYear(int year);
 
 }
