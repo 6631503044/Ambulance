@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class SymptomEmgForEachCase {
     @Id
     private Integer symptom_Id;
-    private String symptom_List;
+    private String Emergency_Id;
     
     public Integer getSymptom_Id() {
         return symptom_Id;
@@ -20,10 +20,10 @@ public class SymptomEmgForEachCase {
     public void setSymptom_Id(Integer symptom_Id) {
         this.symptom_Id = symptom_Id;
     }
-    public String getSymptom_List() {
-        return symptom_List;
+    public String getEmergency_Id() {
+        return Emergency_Id;
     }
-    public void setSymptom_List(String symptom_List) {
-        this.symptom_List = symptom_List;
+    public void setEmergency_Id(String Emergency_Id) {
+        this.Emergency_Id =Emergency_Id;
     }
 }
