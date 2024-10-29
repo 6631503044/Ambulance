@@ -1,8 +1,10 @@
 package com.pbt.ambulance_app.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,17 +17,20 @@ import jakarta.persistence.Query;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
 
     @Autowired
-    PatientRepository loginrepo;
+    PatientRepository patientrepo;
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    // It's need these 4 parameter to make it work
     @GetMapping("/{page}/{filter}/{gender}/{type}")
     public List<Patient> searchByHN(
             @PathVariable Integer page,
@@ -82,5 +87,29 @@ public class PatientController {
 
         // Execute the query and return the results
         return query.getResultList();
+    }
+
+    @PutMapping("")
+    public ResponseEntity<String> editByHN( @RequestBody Patient updatedPatient) {
+        // Find the patient by HN
+        Optional<Patient> optionalPatient = patientrepo.findById(updatedPatient.getHN());
+
+        if (optionalPatient.isPresent()) {
+            Patient existingPatient = optionalPatient.get();
+
+            // Update fields in the existing patient with the new data
+            existingPatient.setPatient_Status_Id(updatedPatient.getPatient_Status_Id());
+            existingPatient.setAge_Id(updatedPatient.getAge_Id());
+            existingPatient.setGender(updatedPatient.getGender());
+            existingPatient.setPhone_Number(updatedPatient.getPhone_Number());
+            existingPatient.setPatient_Type_Id(updatedPatient.getPatient_Type_Id());
+
+            // Save the updated patient
+            patientrepo.save(existingPatient);
+
+            return ResponseEntity.ok("Patient record updated successfully.");
+        } else {
+            return ResponseEntity.status(404).body("Patient with HN " + updatedPatient.getHN() + " not found.");
+        }
     }
 }
