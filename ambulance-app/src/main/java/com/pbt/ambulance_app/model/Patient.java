@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Patient {
@@ -16,6 +18,19 @@ public class Patient {
     private String phone_Number;
     private Integer patient_Type_Id;
     
+    @OneToMany
+    private NormalCase normalCase;
+
+    @ManyToOne
+    private PatientStatus patientStatus;
+
+    @ManyToOne
+    private PatientType patientType;
+
+    @ManyToOne
+    private Age age;
+
+
     public Integer getHN() {
         return HN;
     }

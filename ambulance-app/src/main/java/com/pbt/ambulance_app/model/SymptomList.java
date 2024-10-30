@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.time.LocalTime;
 
 @Entity
@@ -15,6 +17,9 @@ public class SymptomList {
     private Integer symptom_Id;
     private String symptom_List;
     
+    @OneToMany
+    private SymptomEmgForEachCase symptomEmgForEachCase;
+
     public Integer getSymptom_Id() {
         return symptom_Id;
     }

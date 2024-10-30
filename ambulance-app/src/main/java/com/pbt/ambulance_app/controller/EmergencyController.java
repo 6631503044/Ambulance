@@ -3,12 +3,14 @@ package com.pbt.ambulance_app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pbt.ambulance_app.dto.EmergencyDTO;
 import com.pbt.ambulance_app.model.Emergency;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
-import com.pbt.ambulance_app.model.EmergencyDTO;
 import com.pbt.ambulance_app.service.EmergencyService;
 import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * 3.fliter??
  * 
  */
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/emergency")
@@ -55,13 +59,18 @@ public class EmergencyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    /* 
-    @GetMapping("/{page}")
-    public ResponseEntity<List<EmergencyDTO>> getAllEmergency(@PathVariable int page) {
-        String sql ="Select ";
+@GetMapping("/{page}")
+    public List<EmergencyDTO> getAllEmergency(@PathVariable int page) {
+        //Use inner join 
+        String sql ="SELECT emergency_Case_Id,severity FROM Emergency;";
         Query query = entitymanager.createNativeQuery(sql);
-        return ();
-    }*/
+         int pageSize = 10;
+        query.setFirstResult((page - 1) * pageSize);
+        query.setMaxResults(pageSize);
+
+        // Execute the query and return the results
+        return query.getResultList();
+    }
 
 
 

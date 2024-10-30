@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Emergency {
@@ -19,6 +21,15 @@ public class Emergency {
     private double emg_Coordinate_Long;
     private String emg_Location;
     private String emg_Duration;
+
+    @OneToMany
+    private SymptomEmgForEachCase symptomEmgForEachCase;
+
+    @ManyToOne
+    private PatientType patientType;
+
+    @ManyToOne
+    private PatientStatus patientStatus;
     
     public String getEmergency_Case_Id() {
         return emergency_Case_Id;

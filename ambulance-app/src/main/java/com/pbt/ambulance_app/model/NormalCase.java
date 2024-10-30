@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalTime;
 import java.time.LocalDate;
 
@@ -26,6 +28,13 @@ public class NormalCase {
     private String duration;
     private Integer HN;
 
+    @ManyToOne
+    private PatientType patientType;
+
+    @ManyToOne
+    private PatientStatus patientStatus;
+
+    
     
     public String getCase_Id() {
         return case_Id;
