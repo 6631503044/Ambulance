@@ -3,8 +3,11 @@ package com.pbt.ambulance_app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.print.DocFlavor.STRING;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @RestController
 @RequestMapping("/patient")
@@ -112,4 +117,17 @@ public class PatientController {
             return ResponseEntity.status(404).body("Patient with HN " + updatedPatient.getHN() + " not found.");
         }
     }
+
+    @PostMapping("")
+    public ResponseEntity<String> addPatient(@RequestBody Patient NewPatient) {
+        // Check if a patient with the given HN already exists
+        if(patientrepo.findById(NewPatient.getHN()).isPresent()) {
+            return ResponseEntity.status(409).body("This patient is already exists");
+        }else {
+            // Save the new patient and return 201 Created message
+            patientrepo.save(NewPatient);
+            return ResponseEntity.status(201).body("Succesfully Created");
+        }
+    }
+    
 }
