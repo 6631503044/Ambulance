@@ -44,6 +44,24 @@ public class EmergencyController {
     EmergencyService emergencyservice;
 
     //get json at format EmergencyDTO  to Put it in Database by use Servicemethod(Just creat method!!)
+    
+    @PersistenceContext
+    private EntityManager entitymanager;
+
+    //get json at format EmergencyDTO  to Put it in Database by use Servicemethod(Just creat method!!)
+    @PutMapping()
+    public ResponseEntity<String>  AddEmergency(@RequestBody EmergencyDTO Emer){
+        emergencyservice.addSympandEmerid(Emer);     
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    /* 
+    @GetMapping("/{page}")
+    public ResponseEntity<List<EmergencyDTO>> getAllEmergency(@PathVariable int page) {
+        String sql ="Select ";
+        Query query = entitymanager.createNativeQuery(sql);
+        return ();
+    }*/
 
 
 
