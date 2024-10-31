@@ -27,10 +27,10 @@ public class EmergencyService {
         String Emr_id = generateNextId();
 
         //add the new data for SymptomEmgForEachCase
-        for(Integer i: emerdto.getSymptom_id()){
+        for(Integer i: emerdto.getSymptom_Id()){
             SymptomEmgForEachCase symptom = new SymptomEmgForEachCase();
             symptom.setSymptom_Id(i);
-            symptom.setEmergency_Id(Emr_id);
+            symptom.setEmergency_Case_Id(Emr_id);
             sympforeachrepo.save(symptom);
         }
         addEmergency(emerdto,Emr_id);
