@@ -2,6 +2,8 @@ package com.pbt.ambulance_app.dto;
 
 import java.util.List;
 
+import com.pbt.ambulance_app.model.Emergency;
+
 public class EmergencyDTO {
     
     private String emergency_Case_Id;
@@ -14,6 +16,8 @@ public class EmergencyDTO {
     private String emg_Location;
     private String emg_Duration;
     private List<Integer> symptom_Id;
+
+
     public String getEmergency_Case_Id() {
         return emergency_Case_Id;
     }

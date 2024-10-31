@@ -1,6 +1,7 @@
 package com.pbt.ambulance_app.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,9 +66,8 @@ public class EmergencyController {
     //if i have time I will caome back and find new solution Maybe i will Use hash map
     //I will add the filter later
     @GetMapping("/{page}")
-    public List<EmergencyDTO> getAllEmergency(@PathVariable int page) {
-        //Use inner join 
-        List<EmergencyDTO> DTO = new ArrayList<>();
+    public HashMap<Emergency,List<Integer>> getAllEmergency(@PathVariable int page) {
+
         List<Emergency> result = new ArrayList<>();
         
         
@@ -76,31 +76,27 @@ public class EmergencyController {
         String sql ="SELECT * FROM Emergency ;";
         Query query = entitymanager.createNativeQuery(sql,Emergency.class);
          int pageSize = 10;
+        //fliter
+
+
         query.setFirstResult((page - 1) * pageSize);
         query.setMaxResults(pageSize);
         result =  query.getResultList();
-        for (Emergency emergency : result) {
-            EmergencyDTO Sort = new EmergencyDTO();
+        HashMap<Emergency,List<Integer>> Sort =  new HashMap<>();
+        
 
-            Sort.setEmergency_Case_Id(emergency.getEmergency_Case_Id());
-            Sort.setEmg_Coordinate_Lat(emergency .getEmg_Coordinate_Lat());
-            Sort.setEmg_Coordinate_Long(emergency .getEmg_Coordinate_Lat());
-            Sort.setEmg_Description(emergency .getEmg_Description());
-            Sort.setEmg_Duration(emergency .getEmg_Duration());
-            Sort.setEmg_Location(emergency .getEmg_Location());
-            Sort.setPatient_Status_Id(emergency .getPatient_Status_Id());
-            Sort.setPatient_Type_Id(emergency .getPatient_Type_Id());
-            Sort.setSeverity(emergency.getSeverity());
-           
-           List<SymptomEmgForEachCase> symptoms = symptomEmgForEachCaseRepository.findByEmergency_Case_Id(emergency.getEmergency_Case_Id());
-           List<Integer> symptomIds = symptoms.stream().map(SymptomEmgForEachCase::getSymptom_Id).collect(Collectors.toList());//Use steam to manage about list and map to class and get the choose Type that we want to collect
-            Sort.setSymptom_Id(symptomIds);
-            DTO.add(Sort);
+        for (Emergency emergency : result) {
+            List<SymptomEmgForEachCase> symptoms = symptomEmgForEachCaseRepository.findByEmergency_Case_Id(emergency.getEmergency_Case_Id());
+            List<Integer> symptomIds = symptoms.stream() // Create a Stream from the list
+                                    .map(SymptomEmgForEachCase::getSymptom_Id) // Map to symptom IDs
+                                    .collect(Collectors.toList());
+            // Add the emergency and its symptoms list to the HashMap
+            Sort.put(emergency, symptomIds);
 
         }
         // Execute the query and return the results
         
-        return DTO;
+        return Sort;
     }
 
 
