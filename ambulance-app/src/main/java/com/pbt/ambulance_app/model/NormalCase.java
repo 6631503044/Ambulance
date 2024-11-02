@@ -2,6 +2,7 @@ package com.pbt.ambulance_app.model;
 import org.hibernate.annotations.GeneratorType;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,104 +16,109 @@ import java.time.LocalDate;
 public class NormalCase {
     @Id
     private String case_Id;
-    private LocalTime call_Time;
-    private LocalDate call_Date;
     private LocalTime pickup_Time;
     private LocalDate pickup_Date;
-    private Integer patient_Type_Id;
-    private Integer patient_Status_Id;
     private String description;
-    private double coordinate_Lat;
-    private double coordinate_Long;
+    private Double coordinate_LongAndLat;
     private String location;
-    private String duration;
     private Integer HN;
+    private String ambulance_Status;
+    private Integer patient_Type_Id;
 
     @ManyToOne
+    @Column(name = "Patient")
+    private Patient patient;
+
+    @ManyToOne
+    @Column(name = "Patient_Type")
     private PatientType patientType;
 
-    @ManyToOne
-    private PatientStatus patientStatus;
-
-    
-    
     public String getCase_Id() {
         return case_Id;
     }
+
     public void setCase_Id(String case_Id) {
         this.case_Id = case_Id;
     }
-    public LocalTime getCall_Time() {
-        return call_Time;
-    }
-    public void setCall_Time(LocalTime call_Time) {
-        this.call_Time = call_Time;
-    }
-    public LocalDate getCall_Date() {
-        return call_Date;
-    }
-    public void setCall_Date(LocalDate call_Date) {
-        this.call_Date = call_Date;
-    }
+
     public LocalTime getPickup_Time() {
         return pickup_Time;
     }
+
     public void setPickup_Time(LocalTime pickup_Time) {
         this.pickup_Time = pickup_Time;
     }
+
     public LocalDate getPickup_Date() {
         return pickup_Date;
     }
+
     public void setPickup_Date(LocalDate pickup_Date) {
         this.pickup_Date = pickup_Date;
     }
-    public Integer getPatient_Type_Id() {
-        return patient_Type_Id;
-    }
-    public void setPatient_Type_Id(Integer patient_Type_Id) {
-        this.patient_Type_Id = patient_Type_Id;
-    }
-    public Integer getPatient_Status_Id() {
-        return patient_Status_Id;
-    }
-    public void setPatient_Status_Id(Integer patient_Status_Id) {
-        this.patient_Status_Id = patient_Status_Id;
-    }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public double getCoordinate_Lat() {
-        return coordinate_Lat;
+
+    public Double getCoordinate_LongAndLat() {
+        return coordinate_LongAndLat;
     }
-    public void setCoordinate_Lat(double coordinate_Lat) {
-        this.coordinate_Lat = coordinate_Lat;
+
+    public void setCoordinate_LongAndLat(Double coordinate_LongAndLat) {
+        this.coordinate_LongAndLat = coordinate_LongAndLat;
     }
-    public double getCoordinate_Long() {
-        return coordinate_Long;
-    }
-    public void setCoordinate_Long(double coordinate_Long) {
-        this.coordinate_Long = coordinate_Long;
-    }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
-    public String getDuration() {
-        return duration;
-    }
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
+
     public Integer getHN() {
         return HN;
     }
+
     public void setHN(Integer hN) {
         HN = hN;
+    }
+
+    public String getAmbulance_Status() {
+        return ambulance_Status;
+    }
+
+    public void setAmbulance_Status(String ambulance_Status) {
+        this.ambulance_Status = ambulance_Status;
+    }
+
+    public Integer getPatient_Type_Id() {
+        return patient_Type_Id;
+    }
+
+    public void setPatient_Type_Id(Integer patient_Type_Id) {
+        this.patient_Type_Id = patient_Type_Id;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public PatientType getPatientType() {
+        return patientType;
+    }
+
+    public void setPatientType(PatientType patientType) {
+        this.patientType = patientType;
     }
 
     

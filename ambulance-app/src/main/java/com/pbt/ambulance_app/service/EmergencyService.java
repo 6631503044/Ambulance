@@ -50,10 +50,7 @@ public class EmergencyService {
     public void addEmergency(EmergencyDTO emerdto,String Emr_id){
         Emergency Emernewcase = new Emergency(); 
         Emernewcase.setEmergency_Case_Id(Emr_id);
-        Emernewcase.setEmg_Coordinate_Lat(emerdto.getEmg_Coordinate_Lat());
-        Emernewcase.setEmg_Coordinate_Long(emerdto.getEmg_Coordinate_Lat());
         Emernewcase.setEmg_Description(emerdto.getEmg_Description());
-        Emernewcase.setEmg_Duration(emerdto.getEmg_Duration());
         Emernewcase.setEmg_Location(emerdto.getEmg_Location());
         Emernewcase.setPatient_Status_Id(emerdto.getPatient_Status_Id());
         Emernewcase.setPatient_Type_Id(emerdto.getPatient_Type_Id());

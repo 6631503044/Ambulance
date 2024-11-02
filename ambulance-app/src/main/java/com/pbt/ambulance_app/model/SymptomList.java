@@ -3,6 +3,7 @@ package com.pbt.ambulance_app.model;
 import org.hibernate.annotations.GeneratorType;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class SymptomList {
     private String symptom_List;
     
     @OneToMany
+    @Column(name = "Symptom_Emg_For_Each_Case")
     private SymptomEmgForEachCase symptomEmgForEachCase;
 
     public Integer getSymptom_Id() {
