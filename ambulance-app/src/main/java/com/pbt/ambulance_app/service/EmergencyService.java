@@ -1,5 +1,6 @@
 package com.pbt.ambulance_app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.pbt.ambulance_app.model.Emergency;
 import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
+import com.pbt.ambulance_app.repository.SymptomListRepository;
 import com.pbt.ambulance_app.model.PatientStatus;
 
 @Service
@@ -18,23 +20,31 @@ public class EmergencyService {
     @Autowired
     EmergencyRepository emerrepo;
 
+     @Autowired
+    SymptomListRepository symptomListRepository;
+
     @Autowired
     SymptomEmgForEachCaseRepository sympforeachrepo;
 //defind new name
 //logic to add the new row for table  SymptomEmgForEachCase and maybe Emergency table
-    public void addSympandEmerid (EmergencyDTO emerdto){
+    public void addSympandEmerid (Emergency newEmergency){
 
         //call generateNextid
         String Emr_id = generateNextId();
+        newEmergency.setEmergency_Case_Id(Emr_id);
+  
+        for(SymptomEmgForEachCase i : newEmergency.getSymptomEmgForEachCase()){
+            SymptomEmgForEachCase Sort = new SymptomEmgForEachCase();
+            Sort.setEmergency(newEmergency);
+            Sort.setSymptomList(symptomListRepository.findBySymptomId( i.getSymptomList().getSymptom_Id()));
+            sympforeachrepo.save(Sort);
 
-        //add the new data for SymptomEmgForEachCase
-        for(Integer i: emerdto.getSymptom_Id()){
-            SymptomEmgForEachCase symptom = new SymptomEmgForEachCase();
-            symptom.setSymptom_Id(i);
-            symptom.setEmergency_Case_Id(Emr_id);
-            sympforeachrepo.save(symptom);
         }
-        addEmergency(emerdto,Emr_id);
+
+        emerrepo.save(newEmergency);
+
+
+
 
     }
 
@@ -47,17 +57,4 @@ public class EmergencyService {
 
     }
 
-    //Add data to Emergency
-    public void addEmergency(EmergencyDTO emerdto,String Emr_id){
-        Emergency Emernewcase = new Emergency(); 
-        Emernewcase.setEmergency_Case_Id(Emr_id);
-        Emernewcase.setEmg_Description(emerdto.getEmg_Description());
-        Emernewcase.setEmg_Location(emerdto.getEmg_Location());
-        Emernewcase.setPatient_Status_Id(emerdto.getPatient_Status_Id());
-        Emernewcase.setPatient_Type_Id(emerdto.getPatient_Type_Id());
-        Emernewcase.setSeverity(emerdto.getSeverity());
-
-        emerrepo.save(Emernewcase);
-
-    }
 }

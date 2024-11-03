@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 
 
-import com.pbt.ambulance_app.dto.EmergencyDTO;
+import com.pbt.ambulance_app.model.SymptomList;
+import com.pbt.ambulance_app.repository.SymptomListRepository;
 import com.pbt.ambulance_app.model.Emergency;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.service.EmergencyService;
 import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
+import com.pbt.ambulance_app.model.SymptomList;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
 
 import jakarta.persistence.EntityManager;
@@ -46,6 +48,9 @@ public class EmergencyController {
     EmergencyRepository emergencyrepository;
 
     @Autowired
+    SymptomListRepository symptomListRepository;
+
+    @Autowired
     SymptomEmgForEachCaseRepository  symptomEmgForEachCaseRepository;
 
     //have the logic of put data for emergency table and symptomforeachemergency (use it like use anthor class)
@@ -59,7 +64,7 @@ public class EmergencyController {
 
     //get json at format EmergencyDTO  to Put it in Database by use Servicemethod(Just creat method!!)
     @PostMapping()
-    public ResponseEntity<String>  AddEmergency(@RequestBody EmergencyDTO Emer){
+    public ResponseEntity<String>  AddEmergency(@RequestBody Emergency Emer){
         emergencyservice.addSympandEmerid(Emer);     
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -67,12 +72,9 @@ public class EmergencyController {
     //if i have time I will caome back and find new solution Maybe i will Use hash map
     //I will add the filter later
     @GetMapping("/{page}")
-    public HashMap<Emergency,List<Integer>> getAllEmergency(@PathVariable int page) {
+    public List<Emergency> getAllEmergency(@PathVariable int page) {
 
-        List<Emergency> result = new ArrayList<>();
-        
-        
-
+        List<Emergency> Sort = new ArrayList<>();
         //DTO.setSymptom_Id(symptomemgforeachcase.findByEmergency_Id());
         String sql ="SELECT * FROM Emergency ;";
         Query query = entitymanager.createNativeQuery(sql,Emergency.class);
@@ -82,19 +84,8 @@ public class EmergencyController {
 
         query.setFirstResult((page - 1) * pageSize);
         query.setMaxResults(pageSize);
-        result =  query.getResultList();
-        HashMap<Emergency,List<Integer>> Sort =  new HashMap<>();
-        
-
-        for (Emergency emergency : result) {
-            List<SymptomEmgForEachCase> symptoms = symptomEmgForEachCaseRepository.findByEmergencyCaseId(emergency.getEmergency_Case_Id());
-            List<Integer> symptomIds = symptoms.stream() // Create a Stream from the list
-                                    .map(SymptomEmgForEachCase::getSymptom_Id) // Map to symptom IDs
-                                    .collect(Collectors.toList());
-            // Add the emergency and its symptoms list to the HashMap
-            Sort.put(emergency, symptomIds);
-
-        }
+        Sort =  query.getResultList();
+       
         // Execute the query and return the results
         
         return Sort;
