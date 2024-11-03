@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.time.LocalTime;
@@ -26,12 +27,14 @@ public class NormalCase {
     private Integer patient_Type_Id;
 
     @ManyToOne
-    @Column(name = "Patient")
+    @JoinColumn(name = "HN")
     private Patient patient;
 
     @ManyToOne
-    @Column(name = "Patient_Type")
+    @JoinColumn(name = "patient_Type_Id")
     private PatientType patientType;
+
+    
 
     public String getCase_Id() {
         return case_Id;

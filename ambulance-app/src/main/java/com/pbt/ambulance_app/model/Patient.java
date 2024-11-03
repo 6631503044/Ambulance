@@ -1,17 +1,22 @@
 package com.pbt.ambulance_app.model;
+import java.util.List;
+
 import org.hibernate.annotations.GeneratorType;
 import jakarta.annotation.Generated;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class Patient {
     @Id
+    @Column (name = "HN")
     private Integer HN;
     private Integer patient_Type_Id;
     private String phone_Number;
@@ -22,24 +27,24 @@ public class Patient {
     private String description;
     private Integer patient_Status_Id;
     
-    @OneToMany
-    @Column(name = "Normal_Case")
-    private NormalCase normalCase;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //JUST IN CASE need to pull data from normal case from patient
+    private List<NormalCase> normalCase;
 
     @ManyToOne
-    @Column(name = "Patient_Status")
+    @JoinColumn(name = "patient_Status_Id")
     private PatientStatus patientStatus;
 
     @ManyToOne
-    @Column(name = "Patient_Type")
+    @JoinColumn(name = "patient_Type_Id")
     private PatientType patientType;
 
     @ManyToOne
-    @Column(name = "Age")
+    @JoinColumn(name = "age_Id")
     private Age age;
 
     @ManyToOne
-    @Column(name = "Area")
+    @JoinColumn(name = "area_Id")
     private Area area;
 
     public Integer getHN() {
@@ -114,14 +119,6 @@ public class Patient {
         this.patient_Status_Id = patient_Status_Id;
     }
 
-    public NormalCase getNormalCase() {
-        return normalCase;
-    }
-
-    public void setNormalCase(NormalCase normalCase) {
-        this.normalCase = normalCase;
-    }
-
     public PatientStatus getPatientStatus() {
         return patientStatus;
     }
@@ -153,6 +150,16 @@ public class Patient {
     public void setArea(Area area) {
         this.area = area;
     }
+
+    public List<NormalCase> getNormalCase() {
+        return normalCase;
+    }
+
+    public void setNormalCase(List<NormalCase> normalCase) {
+        this.normalCase = normalCase;
+    }
+
+    
 
     
 }

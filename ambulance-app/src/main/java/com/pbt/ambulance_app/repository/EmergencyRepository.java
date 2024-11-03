@@ -9,5 +9,5 @@ import com.pbt.ambulance_app.model.Emergency;
 @Repository
 public interface EmergencyRepository  extends CrudRepository<Emergency, String>{
 
-    Emergency findByEmergency_Case_Id(String emergency_Case_Id);
+    Emergency findByEmergencyCaseId(String emergencyCaseId);
 }

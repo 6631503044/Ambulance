@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalTime;
 
 @Entity
@@ -14,6 +17,14 @@ public class SymptomEmgForEachCase {
     private Integer symptom_Id;
     private String emergency_Case_Id;
     
+    @ManyToOne
+    @JoinColumn(name = "emergency_Case_Id")
+    private Emergency emergency;
+
+    @ManyToOne
+    @JoinColumn(name = "symptom_Id")
+    private SymptomList symptomList;
+
     public Integer getSymptom_Id() {
         return symptom_Id;
     }

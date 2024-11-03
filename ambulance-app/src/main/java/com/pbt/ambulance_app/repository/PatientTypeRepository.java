@@ -7,5 +7,5 @@ import com.pbt.ambulance_app.model.PatientType;
 
 @Repository
 public interface PatientTypeRepository  extends CrudRepository<PatientType, Integer>{
-    PatientType findByPatient_Type_Id(int patient_Type_Id);
+    PatientType findByPatientTypeId(int patientTypeId);
 }

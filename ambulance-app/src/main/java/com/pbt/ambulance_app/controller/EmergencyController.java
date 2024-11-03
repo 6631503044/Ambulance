@@ -87,7 +87,7 @@ public class EmergencyController {
         
 
         for (Emergency emergency : result) {
-            List<SymptomEmgForEachCase> symptoms = symptomEmgForEachCaseRepository.findByEmergency_Case_Id(emergency.getEmergency_Case_Id());
+            List<SymptomEmgForEachCase> symptoms = symptomEmgForEachCaseRepository.findByEmergencyCaseId(emergency.getEmergency_Case_Id());
             List<Integer> symptomIds = symptoms.stream() // Create a Stream from the list
                                     .map(SymptomEmgForEachCase::getSymptom_Id) // Map to symptom IDs
                                     .collect(Collectors.toList());

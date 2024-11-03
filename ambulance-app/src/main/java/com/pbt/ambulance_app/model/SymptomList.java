@@ -18,10 +18,6 @@ public class SymptomList {
     private Integer symptom_Id;
     private String symptom_List;
     
-    @OneToMany
-    @Column(name = "Symptom_Emg_For_Each_Case")
-    private SymptomEmgForEachCase symptomEmgForEachCase;
-
     public Integer getSymptom_Id() {
         return symptom_Id;
     }

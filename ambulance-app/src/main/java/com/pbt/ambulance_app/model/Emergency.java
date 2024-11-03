@@ -2,15 +2,18 @@ package com.pbt.ambulance_app.model;
 import org.hibernate.annotations.GeneratorType;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Emergency {
@@ -30,20 +33,19 @@ public class Emergency {
     private LocalTime emg_Time;
 
 
-    @OneToMany
-    @Column(name = "Symptom_Emg_For_Each_Case")
-    private SymptomEmgForEachCase symptomEmgForEachCase;
+    @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
+    private List<SymptomEmgForEachCase> symptomEmgForEachCase;
 
     @ManyToOne
-    @Column(name = "Patient_Type")
+    @JoinColumn(name = "patient_Type_Id")
     private PatientType patientType;
 
     @ManyToOne
-    @Column(name = "Patient_Status")
+    @JoinColumn(name = "patient_Status_Id")
     private PatientStatus patientStatus;
 
     @ManyToOne
-    @Column(name = "Area")
+    @JoinColumn(name = "area_Id")
     private Area area;
 
     public String getEmergency_Case_Id() {
@@ -149,15 +151,6 @@ public class Emergency {
     public void setEmg_Time(LocalTime emg_Time) {
         this.emg_Time = emg_Time;
     }
-
-    public SymptomEmgForEachCase getSymptomEmgForEachCase() {
-        return symptomEmgForEachCase;
-    }
-
-    public void setSymptomEmgForEachCase(SymptomEmgForEachCase symptomEmgForEachCase) {
-        this.symptomEmgForEachCase = symptomEmgForEachCase;
-    }
-
     public PatientType getPatientType() {
         return patientType;
     }
@@ -181,6 +174,15 @@ public class Emergency {
     public void setArea(Area area) {
         this.area = area;
     }
+
+    public List<SymptomEmgForEachCase> getSymptomEmgForEachCase() {
+        return symptomEmgForEachCase;
+    }
+
+    public void setSymptomEmgForEachCase(List<SymptomEmgForEachCase> symptomEmgForEachCase) {
+        this.symptomEmgForEachCase = symptomEmgForEachCase;
+    }
+    
     
     
 }
