@@ -101,11 +101,11 @@ public class PatientController {
             Patient existingPatient = optionalPatient.get();
 
             // Update fields in the existing patient with the new data
-            existingPatient.setPatient_Status_Id(updatedPatient.getPatient_Status_Id());
-            existingPatient.setAge_Id(updatedPatient.getAge_Id());
+            existingPatient.setPatientStatus((updatedPatient.getPatientStatus()));
+            existingPatient.setAge((updatedPatient.getAge()));
             existingPatient.setGender(updatedPatient.getGender());
             existingPatient.setPhone_Number(updatedPatient.getPhone_Number());
-            existingPatient.setPatient_Type_Id(updatedPatient.getPatient_Type_Id());
+            existingPatient.setPatientType((updatedPatient.getPatientType())));
 
             // Save the updated patient
             patientrepo.save(existingPatient);
