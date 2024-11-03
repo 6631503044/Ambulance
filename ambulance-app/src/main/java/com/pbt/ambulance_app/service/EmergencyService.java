@@ -10,6 +10,7 @@ import com.pbt.ambulance_app.model.Emergency;
 import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
+import com.pbt.ambulance_app.model.PatientStatus;
 
 @Service
 public class EmergencyService {

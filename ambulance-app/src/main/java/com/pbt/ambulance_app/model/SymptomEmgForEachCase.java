@@ -14,28 +14,37 @@ import java.time.LocalTime;
 @Entity
 public class SymptomEmgForEachCase {
     @Id
-    private Integer symptom_Id;
-    private String emergency_Case_Id;
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "emergency_Case_Id")
     private Emergency emergency;
 
+    
     @ManyToOne
     @JoinColumn(name = "symptom_Id")
     private SymptomList symptomList;
 
-    public Integer getSymptom_Id() {
-        return symptom_Id;
+
+    public Emergency getEmergency() {
+        return emergency;
     }
-    public void setSymptom_Id(Integer symptom_Id) {
-        this.symptom_Id = symptom_Id;
+    public void setEmergency(Emergency emergency) {
+        this.emergency = emergency;
     }
-    public String getEmergency_Case_Id() {
-        return emergency_Case_Id;
+    public SymptomList getSymptomList() {
+        return symptomList;
     }
-    public void setEmergency_Case_Id(String emergency_Case_Id) {
-        this.emergency_Case_Id = emergency_Case_Id;
+    public void setSymptomList(SymptomList symptomList) {
+        this.symptomList = symptomList;
     }
-  
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    
 }

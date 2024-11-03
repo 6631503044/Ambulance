@@ -19,19 +19,18 @@ import java.util.List;
 public class Emergency {
     @Id
     private String emergency_Case_Id;
-    private Integer patient_Type_Id;
-    private Integer patient_Status_Id;
     private String severity;
     private String emg_Description;
     private Double emg_Coordinate_LongAndLat;
     private String emg_Location;
-    private Integer area_Id;
     private String phone_Number;
     private String gender;
-    private Integer age_Id;
     private LocalDate emg_Day;
     private LocalTime emg_Time;
 
+    @ManyToOne
+    @JoinColumn(name = "age_Id")
+    private Age age;
 
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
     private List<SymptomEmgForEachCase> symptomEmgForEachCase;
@@ -54,22 +53,6 @@ public class Emergency {
 
     public void setEmergency_Case_Id(String emergency_Case_Id) {
         this.emergency_Case_Id = emergency_Case_Id;
-    }
-
-    public Integer getPatient_Type_Id() {
-        return patient_Type_Id;
-    }
-
-    public void setPatient_Type_Id(Integer patient_Type_Id) {
-        this.patient_Type_Id = patient_Type_Id;
-    }
-
-    public Integer getPatient_Status_Id() {
-        return patient_Status_Id;
-    }
-
-    public void setPatient_Status_Id(Integer patient_Status_Id) {
-        this.patient_Status_Id = patient_Status_Id;
     }
 
     public String getSeverity() {
@@ -104,14 +87,6 @@ public class Emergency {
         this.emg_Location = emg_Location;
     }
 
-    public Integer getArea_Id() {
-        return area_Id;
-    }
-
-    public void setArea_Id(Integer area_Id) {
-        this.area_Id = area_Id;
-    }
-
     public String getPhone_Number() {
         return phone_Number;
     }
@@ -127,15 +102,7 @@ public class Emergency {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public Integer getAge_Id() {
-        return age_Id;
-    }
-
-    public void setAge_Id(Integer age_Id) {
-        this.age_Id = age_Id;
-    }
-
+    
     public LocalDate getEmg_Day() {
         return emg_Day;
     }
@@ -167,20 +134,20 @@ public class Emergency {
         this.patientStatus = patientStatus;
     }
 
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
     public List<SymptomEmgForEachCase> getSymptomEmgForEachCase() {
         return symptomEmgForEachCase;
     }
 
     public void setSymptomEmgForEachCase(List<SymptomEmgForEachCase> symptomEmgForEachCase) {
         this.symptomEmgForEachCase = symptomEmgForEachCase;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
     
     

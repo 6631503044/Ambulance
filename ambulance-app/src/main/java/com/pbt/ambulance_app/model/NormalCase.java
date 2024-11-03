@@ -22,9 +22,7 @@ public class NormalCase {
     private String description;
     private Double coordinate_LongAndLat;
     private String location;
-    private Integer HN;
     private String ambulance_Status;
-    private Integer patient_Type_Id;
 
     @ManyToOne
     @JoinColumn(name = "HN")
@@ -83,15 +81,6 @@ public class NormalCase {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    public Integer getHN() {
-        return HN;
-    }
-
-    public void setHN(Integer hN) {
-        HN = hN;
-    }
-
     public String getAmbulance_Status() {
         return ambulance_Status;
     }
@@ -99,15 +88,6 @@ public class NormalCase {
     public void setAmbulance_Status(String ambulance_Status) {
         this.ambulance_Status = ambulance_Status;
     }
-
-    public Integer getPatient_Type_Id() {
-        return patient_Type_Id;
-    }
-
-    public void setPatient_Type_Id(Integer patient_Type_Id) {
-        this.patient_Type_Id = patient_Type_Id;
-    }
-
     public Patient getPatient() {
         return patient;
     }
