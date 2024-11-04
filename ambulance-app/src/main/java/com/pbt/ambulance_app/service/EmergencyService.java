@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pbt.ambulance_app.dto.EmergencyDTO;
 import com.pbt.ambulance_app.model.Emergency;
 import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 import com.pbt.ambulance_app.repository.EmergencyRepository;

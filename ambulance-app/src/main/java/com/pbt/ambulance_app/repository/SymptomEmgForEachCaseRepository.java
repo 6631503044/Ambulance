@@ -9,6 +9,7 @@ import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
 
 @Repository
 public interface SymptomEmgForEachCaseRepository  extends CrudRepository<SymptomEmgForEachCase, Integer>{
-   List<SymptomEmgForEachCase> findBySymptomListSymptomId(int symptomId);
-   List<SymptomEmgForEachCase> findByEmergencyEmergencyCaseId(String emergencyCaseId);
+   List<SymptomEmgForEachCase> findBySymptomId(int symptomId);
+   List<SymptomEmgForEachCase> findByEmergencyCaseId(String emergencyCaseId);
+   SymptomEmgForEachCase findById(int id);
 }
