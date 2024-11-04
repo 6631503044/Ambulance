@@ -34,12 +34,12 @@ public class PatientController {
     private EntityManager entityManager;
 
     // It's need these 4 parameter to make it work
-    @GetMapping("/{page}/{filter}/{gender}/{type}")
+    @GetMapping("/{page}/{filter}/{gender}/{patient_Type_Id}")
     public List<Patient> searchByHN(
             @PathVariable Integer page,
             @PathVariable Integer filter,
             @PathVariable Integer gender,
-            @PathVariable Integer type) {
+            @PathVariable Integer patient_Type_Id) {
 
         StringBuilder jpql = new StringBuilder("SELECT p FROM Patient p WHERE 1=1");
 
@@ -49,8 +49,8 @@ public class PatientController {
         }
 
         // Apply type filter if specified
-        if (type != 0) {
-            jpql.append(" AND p.patient_Type_Id = :type");
+        if (patient_Type_Id != 0) {
+            jpql.append(" AND p.patient_Type_Id = :patient_Type_Id");
         }
 
         // Apply ordering based on filter
@@ -79,8 +79,8 @@ public class PatientController {
             String genderValue = (gender == 1) ? "male" : "female";
             query.setParameter("gender", genderValue);
         }
-        if (type != 0) {
-            query.setParameter("type", type);
+        if (patient_Type_Id != 0) {
+            query.setParameter("patient_Type_Id", patient_Type_Id);
         }
 
         // Set pagination (10 records per page)

@@ -74,7 +74,7 @@ public class EmergencyController {
     // if i have time I will caome back and find new solution Maybe i will Use hash
     // map
     // I will add the filter later
-    @GetMapping("/{page}/{sort}/{gender}/{type}/{serverity}")
+    @GetMapping("/{page}/{sort}/{gender}/{type}/{severity}")
     public List<Emergency> getAllEmergency(
             @PathVariable Integer page,
             @PathVariable Integer sort,
@@ -82,29 +82,29 @@ public class EmergencyController {
             @PathVariable Integer type,
             @PathVariable String severity) {
 
-        StringBuilder sqlStatement = new StringBuilder("SELECT e FORM Emergency e WHERE 1=1");
+        StringBuilder sqlStatement = new StringBuilder("SELECT e FROM Emergency e WHERE 1=1");
         if (gender != null) {
-            sqlStatement.append("AND e.gender = :gender");
+            sqlStatement.append(" AND e.gender = :gender");
         }
         if (severity != null) {
-            sqlStatement.append("AND e.severity = :severity");    // incase we use severity
+            sqlStatement.append(" AND e.severity = :severity");    // incase we use severity
         }
         if (type != null) {
-            sqlStatement.append("AND e.patient_Type_Id =:type");
+            sqlStatement.append(" AND e.patient_Type_Id = :type");
         }
 
         switch (sort) {// fliter old to new /new to old Emer and age
             case 1:
-                sqlStatement.append("ORDER BY e.emergency_Case_Id DESC");//Emer Old to new
+                sqlStatement.append(" ORDER BY e.emergency_Case_Id DESC");//Emer Old to new
 
                 break;
-            case 2:sqlStatement.append("ORDER BY e.emergency_Case_Id ASC");//Emer New to old
+            case 2:sqlStatement.append(" ORDER BY e.emergency_Case_Id ASC");//Emer New to old
 
                 break;
-            case 3:sqlStatement.append("ORDER BY e.age_Id DESC ");//Age Hight to low
+            case 3:sqlStatement.append(" ORDER BY e.age_Id DESC ");//Age Hight to low
 
                 break;
-            case 4:sqlStatement.append("ORDER BY e.age_Id ASC");//Age ow to hight
+            case 4:sqlStatement.append(" ORDER BY e.age_Id ASC");//Age ow to hight
 
                 break;
 
@@ -112,7 +112,7 @@ public class EmergencyController {
                 break;
         }
         List<Emergency> Insert = new ArrayList<>();
-        Query query = entitymanager.createNativeQuery(sqlStatement.toString());
+        Query query = entitymanager.createNativeQuery(sqlStatement.toString(),Emergency.class);
       //set paramiter 
    if (gender != null) {
             query.setParameter("gender",gender );
