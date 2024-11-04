@@ -1,10 +1,9 @@
 package com.pbt.ambulance_app.model;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GeneratorType;
-import jakarta.annotation.Generated;
 
 @Entity
-public class Age {
+@Table(name = "age")
+public class age {
     @Id
     @Column(name = "age_Id")
     private Integer ageId;

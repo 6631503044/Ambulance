@@ -1,7 +1,6 @@
 package com.pbt.ambulance_app.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.stream.Collectors;
 
-import com.pbt.ambulance_app.model.SymptomList;
 import com.pbt.ambulance_app.repository.SymptomListRepository;
-import com.pbt.ambulance_app.model.Emergency;
+import com.pbt.ambulance_app.model.emergency;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.service.EmergencyService;
-import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
-import com.pbt.ambulance_app.model.SymptomList;
+import com.pbt.ambulance_app.model.symptomemgforeachcase;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
 
 import jakarta.persistence.EntityManager;
@@ -66,52 +62,52 @@ public class EmergencyController {
     // get json at format EmergencyDTO to Put it in Database by use
     // Servicemethod(Just creat method!!)
     @PostMapping()
-    public ResponseEntity<String> AddEmergency(@RequestBody Emergency Emer) {
+    public ResponseEntity<String> AddEmergency(@RequestBody emergency Emer) {
         emergencyservice.addSympandEmerid(Emer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // if i have time I will caome back and find new solution Maybe i will Use hash
+    // if I have time I will come back and find new solution Maybe I will Use hash
     // map
     // I will add the filter later
-    @GetMapping("/{page}/{sort}/{gender}/{type}/{serverity}")
-    public List<Emergency> getAllEmergency(
+    @GetMapping("/{page}/{sort}/{gender}/{type}/{severity}")
+    public List<emergency> getAllEmergency(
             @PathVariable Integer page,
             @PathVariable Integer sort,
             @PathVariable String gender,
             @PathVariable Integer type,
             @PathVariable String severity) {
 
-        StringBuilder sqlStatement = new StringBuilder("SELECT e FORM Emergency e WHERE 1=1");
+        StringBuilder sqlStatement = new StringBuilder("SELECT * FROM Emergency WHERE 1=1");
         if (gender != null) {
-            sqlStatement.append("AND e.gender = :gender");
+            sqlStatement.append(" AND gender = :gender");
         }
         if (severity != null) {
-            sqlStatement.append("AND e.severity = :severity");    // incase we use severity
+            sqlStatement.append(" AND severity = :severity");    // incase we use severity
         }
         if (type != null) {
-            sqlStatement.append("AND e.patient_Type_Id =:type");
+            sqlStatement.append(" AND patient_Type_Id =:type");
         }
 
         switch (sort) {// fliter old to new /new to old Emer and age
             case 1:
-                sqlStatement.append("ORDER BY e.emergency_Case_Id DESC");//Emer Old to new
+                sqlStatement.append(" ORDER BY emergency_Case_Id DESC");//Emer Old to new
 
                 break;
-            case 2:sqlStatement.append("ORDER BY e.emergency_Case_Id ASC");//Emer New to old
+            case 2:sqlStatement.append(" ORDER BY emergency_Case_Id ASC");//Emer New to old
 
                 break;
-            case 3:sqlStatement.append("ORDER BY e.age_Id DESC ");//Age Hight to low
+            case 3:sqlStatement.append(" ORDER BY age_Id DESC ");//Age Hight to low
 
                 break;
-            case 4:sqlStatement.append("ORDER BY e.age_Id ASC");//Age ow to hight
+            case 4:sqlStatement.append(" ORDER BY age_Id ASC");//Age ow to hight
 
                 break;
 
             default:
                 break;
         }
-        List<Emergency> Insert = new ArrayList<>();
+        List<emergency> Insert = new ArrayList<>();
         Query query = entitymanager.createNativeQuery(sqlStatement.toString());
       //set paramiter 
    if (gender != null) {
@@ -127,17 +123,16 @@ public class EmergencyController {
         int pageSize = 10;
         query.setFirstResult((page - 1) * pageSize);
         query.setMaxResults(pageSize);
-        Insert = query.getResultList();
+        return query.getResultList();
 
-        return Insert;
     }
 
     @PutMapping("")
-    public ResponseEntity<String> editEmergency(@RequestBody Emergency editEmergency) {
+    public ResponseEntity<String> editEmergency(@RequestBody emergency editEmergency) {
         if (emergencyrepository.existsById(editEmergency.getEmergencyCaseId())) {
             emergencyrepository.save(editEmergency);
             // Add logic Emerforeachcase
-            for(SymptomEmgForEachCase i : editEmergency.getSymptomEmgForEachCase()){
+            for(symptomemgforeachcase i : editEmergency.getSymptomEmgForEachCase()){
             symptomEmgForEachCaseRepository.save(i);
             }
 

@@ -2,11 +2,11 @@ package com.pbt.ambulance_app.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pbt.ambulance_app.model.Area;
+import com.pbt.ambulance_app.model.area;
 
 
 @Repository
-public interface AreaRepository  extends CrudRepository<Area, Integer>{
+public interface AreaRepository  extends CrudRepository<area, Integer>{
 
-    Area findByAreaId(int areaId); 
+    area findByAreaId(int areaId);
 }

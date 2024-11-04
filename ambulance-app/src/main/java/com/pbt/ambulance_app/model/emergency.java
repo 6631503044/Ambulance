@@ -1,12 +1,8 @@
 package com.pbt.ambulance_app.model;
-import org.hibernate.annotations.GeneratorType;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,14 +12,14 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-public class Emergency {
+public class emergency {
     @Id
     @Column (name = "emergency_Case_Id")
     private String emergencyCaseId;
     private String severity;
     @Column (name = "emg_Description")
     private String emgDescription;
-    @Column (name = "emg_Coordinate_LongAndLat")
+    @Column (name = "emg_Coordinate_long_and_lat")
     private Double emgCoordinateLongAndLat;
     @Column (name = "emg_Location")
     private String emgLocation;
@@ -37,22 +33,22 @@ public class Emergency {
 
     @ManyToOne
     @JoinColumn(name = "age Id")
-    private Age age;
+    private age age;
 
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
-    private List<SymptomEmgForEachCase> symptomEmgForEachCase;
+    private List<symptomemgforeachcase> symptomEmgForEachCase;
 
     @ManyToOne
     @JoinColumn(name = "patient_Type_Id")
-    private PatientType patientType;
+    private patienttype patientType;
 
     @ManyToOne
     @JoinColumn(name = "patient_Status_Id")
-    private PatientStatus patientStatus;
+    private patientstatus patientStatus;
 
     @ManyToOne
     @JoinColumn(name = "area id")
-    private Area area;
+    private area area;
 
     public String getSeverity() {
         return severity;
@@ -70,35 +66,35 @@ public class Emergency {
         this.gender = gender;
     }
 
-    public PatientType getPatientType() {
+    public patienttype getPatientType() {
         return patientType;
     }
 
-    public void setPatientType(PatientType patientType) {
+    public void setPatientType(patienttype patientType) {
         this.patientType = patientType;
     }
 
-    public PatientStatus getPatientStatus() {
+    public patientstatus getPatientStatus() {
         return patientStatus;
     }
 
-    public void setPatientStatus(PatientStatus patientStatus) {
+    public void setPatientStatus(patientstatus patientStatus) {
         this.patientStatus = patientStatus;
     }
 
-    public List<SymptomEmgForEachCase> getSymptomEmgForEachCase() {
+    public List<symptomemgforeachcase> getSymptomEmgForEachCase() {
         return symptomEmgForEachCase;
     }
 
-    public void setSymptomEmgForEachCase(List<SymptomEmgForEachCase> symptomEmgForEachCase) {
+    public void setSymptomEmgForEachCase(List<symptomemgforeachcase> symptomEmgForEachCase) {
         this.symptomEmgForEachCase = symptomEmgForEachCase;
     }
 
-    public Area getArea() {
+    public area getArea() {
         return area;
     }
 
-    public void setArea(Area area) {
+    public void setArea(area area) {
         this.area = area;
     }
 
@@ -110,11 +106,11 @@ public class Emergency {
         this.emergencyCaseId = emergencyCaseId;
     }
 
-    public Age getAge() {
+    public age getAge() {
         return age;
     }
 
-    public void setAge(Age age) {
+    public void setAge(age age) {
         this.age = age;
     }
 

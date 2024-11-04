@@ -1,7 +1,5 @@
 package com.pbt.ambulance_app.model;
-import org.hibernate.annotations.GeneratorType;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,34 +7,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import java.time.LocalTime;
-
 @Entity
-public class SymptomEmgForEachCase {
+public class symptomemgforeachcase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "emergency_Case_Id")
-    private Emergency emergency;
+    private com.pbt.ambulance_app.model.emergency emergency;
 
 
     @ManyToOne
     @JoinColumn(name = "symptom_Id")
-    private SymptomList symptomList;
+    private symptomlist symptomList;
 
 
-    public Emergency getEmergency() {
+    public com.pbt.ambulance_app.model.emergency getEmergency() {
         return emergency;
     }
-    public void setEmergency(Emergency emergency) {
+    public void setEmergency(com.pbt.ambulance_app.model.emergency emergency) {
         this.emergency = emergency;
     }
-    public SymptomList getSymptomList() {
+    public symptomlist getSymptomList() {
         return symptomList;
     }
-    public void setSymptomList(SymptomList symptomList) {
+    public void setSymptomList(symptomlist symptomList) {
         this.symptomList = symptomList;
     }
     public Integer getId() {

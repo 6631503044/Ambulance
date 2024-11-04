@@ -1,14 +1,10 @@
 package com.pbt.ambulance_app.model;
-import org.hibernate.annotations.GeneratorType;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Login {
+public class login {
 @Id
 private String username;
 

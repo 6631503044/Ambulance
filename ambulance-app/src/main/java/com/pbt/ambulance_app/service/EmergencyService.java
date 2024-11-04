@@ -1,17 +1,13 @@
 package com.pbt.ambulance_app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pbt.ambulance_app.model.Emergency;
-import com.pbt.ambulance_app.model.SymptomEmgForEachCase;
+import com.pbt.ambulance_app.model.emergency;
+import com.pbt.ambulance_app.model.symptomemgforeachcase;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
 import com.pbt.ambulance_app.repository.SymptomListRepository;
-import com.pbt.ambulance_app.model.PatientStatus;
 
 @Service
 public class EmergencyService {
@@ -26,14 +22,14 @@ public class EmergencyService {
     SymptomEmgForEachCaseRepository sympforeachrepo;
 //defind new name
 //logic to add the new row for table  SymptomEmgForEachCase and maybe Emergency table
-    public void addSympandEmerid (Emergency newEmergency){
+    public void addSympandEmerid (emergency newEmergency){
 
         //call generateNextid
         String Emr_id = generateNextId();
         newEmergency.setEmergencyCaseId(Emr_id);
   
-        for(SymptomEmgForEachCase i : newEmergency.getSymptomEmgForEachCase()){
-            SymptomEmgForEachCase Sort = new SymptomEmgForEachCase();
+        for(symptomemgforeachcase i : newEmergency.getSymptomEmgForEachCase()){
+            symptomemgforeachcase Sort = new symptomemgforeachcase();
             Sort.setEmergency(newEmergency);
             Sort.setSymptomList(symptomListRepository.findBySymptomId( i.getSymptomList().getSymptomId()));
             sympforeachrepo.save(Sort);

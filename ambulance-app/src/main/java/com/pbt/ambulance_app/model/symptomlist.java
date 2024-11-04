@@ -1,19 +1,11 @@
 package com.pbt.ambulance_app.model;
 
-import org.hibernate.annotations.GeneratorType;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
-import java.time.LocalTime;
 
 @Entity
-public class SymptomList {
+public class symptomlist {
     @Id
     @Column (name = "symptom_Id")
     private Integer symptomId;

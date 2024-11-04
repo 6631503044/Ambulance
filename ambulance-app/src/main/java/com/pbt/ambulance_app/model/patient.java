@@ -1,20 +1,17 @@
 package com.pbt.ambulance_app.model;
 import java.util.List;
 
-import org.hibernate.annotations.GeneratorType;
-import jakarta.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Patient {
+public class patient {
     @Id
     private Integer HN;
     @Column (name = "phone_Number")
@@ -24,24 +21,25 @@ public class Patient {
     private String description;
     
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //JUST IN CASE need to pull data from normal case from patient
-    private List<NormalCase> normalCase;
+    @OneToMany(mappedBy = "patient") //JUST IN CASE need to pull data from normal case from patient
+    private List<normalcase> normalCase;
 
     @ManyToOne
     @JoinColumn(name = "patient_Status_Id")
-    private PatientStatus patientStatus;
+    private patientstatus patientStatus;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "patient_Type_Id")
-    private PatientType patientType;
+    private patienttype patientType;
 
     @ManyToOne
     @JoinColumn(name = "age_Id")
-    private Age age;
+    private age age;
 
     @ManyToOne
     @JoinColumn(name = "area_Id")
-    private Area area;
+    private area area;
 
     public Integer getHN() {
         return HN;
@@ -75,43 +73,43 @@ public class Patient {
         this.description = description;
     }
 
-    public PatientStatus getPatientStatus() {
+    public patientstatus getPatientStatus() {
         return patientStatus;
     }
 
-    public void setPatientStatus(PatientStatus patientStatus) {
+    public void setPatientStatus(patientstatus patientStatus) {
         this.patientStatus = patientStatus;
     }
 
-    public PatientType getPatientType() {
+    public patienttype getPatientType() {
         return patientType;
     }
 
-    public void setPatientType(PatientType patientType) {
+    public void setPatientType(patienttype patientType) {
         this.patientType = patientType;
     }
 
-    public Age getAge() {
+    public age getAge() {
         return age;
     }
 
-    public void setAge(Age age) {
+    public void setAge(age age) {
         this.age = age;
     }
 
-    public Area getArea() {
+    public area getArea() {
         return area;
     }
 
-    public void setArea(Area area) {
+    public void setArea(area area) {
         this.area = area;
     }
 
-    public List<NormalCase> getNormalCase() {
+    public List<normalcase> getNormalCase() {
         return normalCase;
     }
 
-    public void setNormalCase(List<NormalCase> normalCase) {
+    public void setNormalCase(List<normalcase> normalCase) {
         this.normalCase = normalCase;
     }
 

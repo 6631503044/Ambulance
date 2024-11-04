@@ -1,16 +1,16 @@
 package com.pbt.ambulance_app.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
+import com.pbt.ambulance_app.model.*;
+import com.pbt.ambulance_app.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.pbt.ambulance_app.model.Patient;
-import com.pbt.ambulance_app.repository.PatientRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -32,16 +32,24 @@ public class PatientController {
 
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    private PatientStatusRepository patientStatusRepository;
+    @Autowired
+    private PatientTypeRepository patientTypeRepository;
+    @Autowired
+    private AgeRepository ageRepository;
+    @Autowired
+    private AreaRepository areaRepository;
 
     // It's need these 4 parameter to make it work
     @GetMapping("/{page}/{filter}/{gender}/{type}")
-    public List<Patient> searchByHN(
+    public List<patient> searchByHN(
             @PathVariable Integer page,
             @PathVariable Integer filter,
             @PathVariable Integer gender,
             @PathVariable Integer type) {
 
-        StringBuilder jpql = new StringBuilder("SELECT p FROM Patient p WHERE 1=1");
+        StringBuilder jpql = new StringBuilder("SELECT p FROM patient p WHERE 1=1");
 
         // Apply gender filter if specified
         if (gender != 0) {
@@ -50,7 +58,7 @@ public class PatientController {
 
         // Apply type filter if specified
         if (type != 0) {
-            jpql.append(" AND p.patient_Type_Id = :type");
+            jpql.append(" AND p.patientType.patientTypeId = :type");
         }
 
         // Apply ordering based on filter
@@ -72,7 +80,7 @@ public class PatientController {
                 break;
         }
 
-        Query query = entityManager.createQuery(jpql.toString(), Patient.class);
+        Query query = entityManager.createQuery(jpql.toString(), patient.class);
 
         // Set parameters if conditions apply
         if (gender != 0) {
@@ -93,12 +101,12 @@ public class PatientController {
     }
 
     @PutMapping("")
-    public ResponseEntity<String> editByHN( @RequestBody Patient updatedPatient) {
+    public ResponseEntity<String> editByHN( @RequestBody patient updatedPatient) {
         // Find the patient by HN
-        Optional<Patient> optionalPatient = patientrepo.findById(updatedPatient.getHN());
+        Optional<patient> optionalPatient = patientrepo.findById(updatedPatient.getHN());
 
         if (optionalPatient.isPresent()) {
-            Patient existingPatient = optionalPatient.get();
+            patient existingPatient = optionalPatient.get();
 
             // Update fields in the existing patient with the new data
             existingPatient.setPatientStatus((updatedPatient.getPatientStatus()));
@@ -116,15 +124,59 @@ public class PatientController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<String> addPatient(@RequestBody Patient NewPatient) {
+    @PostMapping
+    public ResponseEntity<String> addPatient(@RequestBody Map<String, Object> newPatientData) {
+        // Extract fields from the JSON map
+        Integer hn = (Integer) newPatientData.get("HN");  // assuming HN is an Integer
+        String phoneNumber = (String) newPatientData.get("phoneNumber");
+        String gender = (String) newPatientData.get("gender");
+        String location = (String) newPatientData.get("location");
+        String description = (String) newPatientData.get("description");
+
         // Check if a patient with the given HN already exists
-        if(patientrepo.findById(NewPatient.getHN()).isPresent()) {
-            return ResponseEntity.status(409).body("This patient is already exists");
-        }else {
+        if (patientrepo.findById(hn).isPresent()) {
+            return ResponseEntity.status(409).body("This patient already exists");
+        } else {
+            // Create a new Patient object and set its fields
+            patient newPatient = new patient();
+            newPatient.setHN(hn);
+            newPatient.setPhoneNumber(phoneNumber);
+            newPatient.setGender(gender);
+            newPatient.setLocation(location);
+            newPatient.setDescription(description);
+
+            // Optionally handle related entities if they are included in JSON data
+            // Example for patient status
+            Integer patientStatusId = (Integer) newPatientData.get("patientStatusId");
+            if (patientStatusId != null) {
+                patientstatus patientStatus = patientStatusRepository.findById(patientStatusId).orElse(null);
+                newPatient.setPatientStatus(patientStatus);
+            }
+
+            // Example for patient type
+            Integer patientTypeId = (Integer) newPatientData.get("patientTypeId");
+            if (patientTypeId != null) {
+                patienttype patientType = patientTypeRepository.findById(patientTypeId).orElse(null);
+                newPatient.setPatientType(patientType);
+            }
+
+            // Example for age group
+            Integer ageId = (Integer) newPatientData.get("ageId");
+            if (ageId != null) {
+                age age = ageRepository.findById(ageId).orElse(null);
+                newPatient.setAge(age);
+            }
+
+            // Example for area
+            Integer areaId = (Integer) newPatientData.get("areaId");
+            if (areaId != null) {
+                area area = areaRepository.findById(areaId).orElse(null);
+                newPatient.setArea(area);
+            }
+
             // Save the new patient and return 201 Created message
-            patientrepo.save(NewPatient);
-            return ResponseEntity.status(201).body("Succesfully Created");
+            patientrepo.save(newPatient);
+            return ResponseEntity.status(201).body("Successfully Created");
         }
     }
     
