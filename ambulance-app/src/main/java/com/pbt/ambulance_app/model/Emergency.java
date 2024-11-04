@@ -18,18 +18,25 @@ import java.util.List;
 @Entity
 public class Emergency {
     @Id
-    private String emergency_Case_Id;
+    @Column (name = "emergency_Case_Id")
+    private String emergencyCaseId;
     private String severity;
-    private String emg_Description;
-    private Double emg_Coordinate_LongAndLat;
-    private String emg_Location;
-    private String phone_Number;
+    @Column (name = "emg_Description")
+    private String emgDescription;
+    @Column (name = "emg_Coordinate_LongAndLat")
+    private Double emgCoordinateLongAndLat;
+    @Column (name = "emg_Location")
+    private String emgLocation;
+    @Column (name = "phone_Number")
+    private String phoneNumber;
     private String gender;
-    private LocalDate emg_Day;
-    private LocalTime emg_Time;
+    @Column (name = "emg_Day")
+    private LocalDate emgDay;
+    @Column (name = "emg_Time")
+    private LocalTime emgTime;
 
     @ManyToOne
-    @JoinColumn(name = "age_Id")
+    @JoinColumn(name = "age Id")
     private Age age;
 
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
@@ -44,16 +51,8 @@ public class Emergency {
     private PatientStatus patientStatus;
 
     @ManyToOne
-    @JoinColumn(name = "area_Id")
+    @JoinColumn(name = "area id")
     private Area area;
-
-    public String getEmergency_Case_Id() {
-        return emergency_Case_Id;
-    }
-
-    public void setEmergency_Case_Id(String emergency_Case_Id) {
-        this.emergency_Case_Id = emergency_Case_Id;
-    }
 
     public String getSeverity() {
         return severity;
@@ -63,38 +62,6 @@ public class Emergency {
         this.severity = severity;
     }
 
-    public String getEmg_Description() {
-        return emg_Description;
-    }
-
-    public void setEmg_Description(String emg_Description) {
-        this.emg_Description = emg_Description;
-    }
-
-    public Double getEmg_Coordinate_LongAndLat() {
-        return emg_Coordinate_LongAndLat;
-    }
-
-    public void setEmg_Coordinate_LongAndLat(Double emg_Coordinate_LongAndLat) {
-        this.emg_Coordinate_LongAndLat = emg_Coordinate_LongAndLat;
-    }
-
-    public String getEmg_Location() {
-        return emg_Location;
-    }
-
-    public void setEmg_Location(String emg_Location) {
-        this.emg_Location = emg_Location;
-    }
-
-    public String getPhone_Number() {
-        return phone_Number;
-    }
-
-    public void setPhone_Number(String phone_Number) {
-        this.phone_Number = phone_Number;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -102,22 +69,7 @@ public class Emergency {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
-    public LocalDate getEmg_Day() {
-        return emg_Day;
-    }
 
-    public void setEmg_Day(LocalDate emg_Day) {
-        this.emg_Day = emg_Day;
-    }
-
-    public LocalTime getEmg_Time() {
-        return emg_Time;
-    }
-
-    public void setEmg_Time(LocalTime emg_Time) {
-        this.emg_Time = emg_Time;
-    }
     public PatientType getPatientType() {
         return patientType;
     }
@@ -149,7 +101,68 @@ public class Emergency {
     public void setArea(Area area) {
         this.area = area;
     }
-    
-    
-    
+
+    public String getEmergencyCaseId() {
+        return emergencyCaseId;
+    }
+
+    public void setEmergencyCaseId(String emergencyCaseId) {
+        this.emergencyCaseId = emergencyCaseId;
+    }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public void setAge(Age age) {
+        this.age = age;
+    }
+
+    public String getEmgDescription() {
+        return emgDescription;
+    }
+
+    public void setEmgDescription(String emgDescription) {
+        this.emgDescription = emgDescription;
+    }
+
+    public Double getEmgCoordinateLongAndLat() {
+        return emgCoordinateLongAndLat;
+    }
+
+    public void setEmgCoordinateLongAndLat(Double emgCoordinateLongAndLat) {
+        this.emgCoordinateLongAndLat = emgCoordinateLongAndLat;
+    }
+
+    public String getEmgLocation() {
+        return emgLocation;
+    }
+
+    public void setEmgLocation(String emgLocation) {
+        this.emgLocation = emgLocation;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getEmgDay() {
+        return emgDay;
+    }
+
+    public void setEmgDay(LocalDate emgDay) {
+        this.emgDay = emgDay;
+    }
+
+    public LocalTime getEmgTime() {
+        return emgTime;
+    }
+
+    public void setEmgTime(LocalTime emgTime) {
+        this.emgTime = emgTime;
+    }
 }

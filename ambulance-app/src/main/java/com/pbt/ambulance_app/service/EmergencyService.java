@@ -31,12 +31,12 @@ public class EmergencyService {
 
         //call generateNextid
         String Emr_id = generateNextId();
-        newEmergency.setEmergency_Case_Id(Emr_id);
+        newEmergency.setEmergencyCaseId(Emr_id);
   
         for(SymptomEmgForEachCase i : newEmergency.getSymptomEmgForEachCase()){
             SymptomEmgForEachCase Sort = new SymptomEmgForEachCase();
             Sort.setEmergency(newEmergency);
-            Sort.setSymptomList(symptomListRepository.findBySymptomId( i.getSymptomList().getSymptom_Id()));
+            Sort.setSymptomList(symptomListRepository.findBySymptomId( i.getSymptomList().getSymptomId()));
             sympforeachrepo.save(Sort);
 
         }

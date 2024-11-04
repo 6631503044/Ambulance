@@ -1,27 +1,29 @@
 package com.pbt.ambulance_app.model;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratorType;
 import jakarta.annotation.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 @Entity
 public class Age {
     @Id
-    private Integer age_Id;
-    private String age_Range;
+    @Column(name = "age_Id")
+    private Integer ageId;
+    @Column (name = "age_Range")
+    private String ageRange;
 
-    public Integer getAge_Id() {
-        return age_Id;
+    public Integer getAgeId() {
+        return ageId;
     }
-    public void setAge_Id(int age_Id) {
-        this.age_Id = age_Id;
+
+    public void setAgeId(Integer ageId) {
+        this.ageId = ageId;
     }
-    public String getAge_Range() {
-        return age_Range;
+
+    public String getAgeRange() {
+        return ageRange;
     }
-    public void setAge_Range(String age_Range) {
-        this.age_Range = age_Range;
+
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
     }
 }

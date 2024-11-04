@@ -21,7 +21,7 @@ public class SymptomEmgForEachCase {
     @JoinColumn(name = "emergency_Case_Id")
     private Emergency emergency;
 
-    
+
     @ManyToOne
     @JoinColumn(name = "symptom_Id")
     private SymptomList symptomList;
@@ -46,5 +46,5 @@ public class SymptomEmgForEachCase {
         this.id = id;
     }
 
-    
+
 }

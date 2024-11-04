@@ -10,8 +10,8 @@ import com.pbt.ambulance_app.model.Patient;
 public interface PatientRepository  extends CrudRepository<Patient, Integer>{
    Patient findByHN(int HN);
    List<Patient> findByGender(String gender);
-   List<Patient> findByPatient_Status_Id(int patientStatusId);
-   List<Patient> findByAge_Id(int ageId);
+   List<Patient> findByPatientStatusPatientStatusId(int patientStatusId);
+   List<Patient> findByAgeAgeId(int ageId);
 
    
 }

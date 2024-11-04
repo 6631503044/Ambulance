@@ -93,7 +93,7 @@ public class EmergencyController {
 
     @PutMapping("")
     public ResponseEntity<String> editEmergency (@RequestBody Emergency editEmergency) {
-        if (emergencyrepository.existsById(editEmergency.getEmergency_Case_Id())) {
+        if (emergencyrepository.existsById(editEmergency.getEmergencyCaseId())) {
             emergencyrepository.save(editEmergency);
             return ResponseEntity.ok("Emergency case updated successfully"); // 200 OK with message
         } else {

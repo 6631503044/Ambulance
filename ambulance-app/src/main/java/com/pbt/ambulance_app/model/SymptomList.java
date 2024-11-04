@@ -15,19 +15,24 @@ import java.time.LocalTime;
 @Entity
 public class SymptomList {
     @Id
-    private Integer symptom_Id;
-    private String symptom_List;
-    
-    public Integer getSymptom_Id() {
-        return symptom_Id;
+    @Column (name = "symptom_Id")
+    private Integer symptomId;
+    @Column (name = "symptom_List")
+    private String symptomList;
+
+    public Integer getSymptomId() {
+        return symptomId;
     }
-    public void setSymptom_Id(Integer symptom_Id) {
-        this.symptom_Id = symptom_Id;
+
+    public void setSymptomId(Integer symptomId) {
+        this.symptomId = symptomId;
     }
-    public String getSymptom_List() {
-        return symptom_List;
+
+    public String getSymptomList() {
+        return symptomList;
     }
-    public void setSymptom_List(String symptom_List) {
-        this.symptom_List = symptom_List;
+
+    public void setSymptomList(String symptomList) {
+        this.symptomList = symptomList;
     }
 }

@@ -16,13 +16,18 @@ import java.time.LocalDate;
 @Entity
 public class NormalCase {
     @Id
-    private String case_Id;
-    private LocalTime pickup_Time;
-    private LocalDate pickup_Date;
+    @Column (name = "case_Id")
+    private String caseId;
+    @Column (name = "pickup_Time")
+    private LocalTime pickupTime;
+    @Column (name = "pickup_Date")
+    private LocalDate pickupDate;
     private String description;
-    private Double coordinate_LongAndLat;
+    @Column(name = "coordinate_LongAndLat", columnDefinition = "float")
+    private double coordinateLongAndLat;
     private String location;
-    private String ambulance_Status;
+    @Column (name = "ambulance_Status")
+    private String ambulanceStatus;
 
     @ManyToOne
     @JoinColumn(name = "HN")
@@ -32,30 +37,28 @@ public class NormalCase {
     @JoinColumn(name = "patient_Type_Id")
     private PatientType patientType;
 
-    
-
-    public String getCase_Id() {
-        return case_Id;
+    public String getCaseId() {
+        return caseId;
     }
 
-    public void setCase_Id(String case_Id) {
-        this.case_Id = case_Id;
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
     }
 
-    public LocalTime getPickup_Time() {
-        return pickup_Time;
+    public LocalTime getPickupTime() {
+        return pickupTime;
     }
 
-    public void setPickup_Time(LocalTime pickup_Time) {
-        this.pickup_Time = pickup_Time;
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
     }
 
-    public LocalDate getPickup_Date() {
-        return pickup_Date;
+    public LocalDate getPickupDate() {
+        return pickupDate;
     }
 
-    public void setPickup_Date(LocalDate pickup_Date) {
-        this.pickup_Date = pickup_Date;
+    public void setPickupDate(LocalDate pickupDate) {
+        this.pickupDate = pickupDate;
     }
 
     public String getDescription() {
@@ -66,12 +69,12 @@ public class NormalCase {
         this.description = description;
     }
 
-    public Double getCoordinate_LongAndLat() {
-        return coordinate_LongAndLat;
+    public Double getCoordinateLongAndLat() {
+        return coordinateLongAndLat;
     }
 
-    public void setCoordinate_LongAndLat(Double coordinate_LongAndLat) {
-        this.coordinate_LongAndLat = coordinate_LongAndLat;
+    public void setCoordinateLongAndLat(Double coordinateLongAndLat) {
+        this.coordinateLongAndLat = coordinateLongAndLat;
     }
 
     public String getLocation() {
@@ -81,13 +84,15 @@ public class NormalCase {
     public void setLocation(String location) {
         this.location = location;
     }
-    public String getAmbulance_Status() {
-        return ambulance_Status;
+
+    public String getAmbulanceStatus() {
+        return ambulanceStatus;
     }
 
-    public void setAmbulance_Status(String ambulance_Status) {
-        this.ambulance_Status = ambulance_Status;
+    public void setAmbulanceStatus(String ambulanceStatus) {
+        this.ambulanceStatus = ambulanceStatus;
     }
+
     public Patient getPatient() {
         return patient;
     }
@@ -103,6 +108,4 @@ public class NormalCase {
     public void setPatientType(PatientType patientType) {
         this.patientType = patientType;
     }
-
-    
 }

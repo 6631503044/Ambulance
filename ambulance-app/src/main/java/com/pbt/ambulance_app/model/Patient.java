@@ -17,7 +17,8 @@ import jakarta.persistence.OneToMany;
 public class Patient {
     @Id
     private Integer HN;
-    private String phone_Number;
+    @Column (name = "phone_Number")
+    private String phoneNumber;
     private String gender;
     private String location;
     private String description;
@@ -48,14 +49,6 @@ public class Patient {
 
     public void setHN(Integer hN) {
         HN = hN;
-    }
-
-    public String getPhone_Number() {
-        return phone_Number;
-    }
-
-    public void setPhone_Number(String phone_Number) {
-        this.phone_Number = phone_Number;
     }
 
     public String getGender() {
@@ -122,7 +115,11 @@ public class Patient {
         this.normalCase = normalCase;
     }
 
-    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-    
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

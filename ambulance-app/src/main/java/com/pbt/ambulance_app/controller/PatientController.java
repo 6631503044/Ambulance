@@ -104,7 +104,7 @@ public class PatientController {
             existingPatient.setPatientStatus((updatedPatient.getPatientStatus()));
             existingPatient.setAge((updatedPatient.getAge()));
             existingPatient.setGender(updatedPatient.getGender());
-            existingPatient.setPhone_Number(updatedPatient.getPhone_Number());
+            existingPatient.setPhoneNumber(updatedPatient.getPhoneNumber());
             existingPatient.setPatientType((updatedPatient.getPatientType()));
 
             // Save the updated patient

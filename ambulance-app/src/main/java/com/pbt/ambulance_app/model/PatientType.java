@@ -1,28 +1,29 @@
 package com.pbt.ambulance_app.model;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratorType;
 import jakarta.annotation.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class PatientType {
     @Id
-    private Integer patient_Type_Id;
-    private String patient_Type;
+    @Column(name = "patient_Type_Id")
+    private Integer patientTypeId;
+    @Column (name = "patient_Type")
+    private String patientType;
 
-    public Integer getPatient_Type_Id() {
-        return patient_Type_Id;
+    public Integer getPatientTypeId() {
+        return patientTypeId;
     }
-    public void setPatient_Type_Id(Integer patient_Type_Id) {
-        this.patient_Type_Id = patient_Type_Id;
+
+    public void setPatientTypeId(Integer patientTypeId) {
+        this.patientTypeId = patientTypeId;
     }
-    public String getPatient_Type() {
-        return patient_Type;
+
+    public String getPatientType() {
+        return patientType;
     }
-    public void setPatient_Type(String patient_Type) {
-        this.patient_Type = patient_Type;
+
+    public void setPatientType(String patientType) {
+        this.patientType = patientType;
     }
 }
