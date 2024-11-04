@@ -78,9 +78,9 @@ public class EmergencyController {
     public List<Emergency> getAllEmergency(
             @PathVariable Integer page,
             @PathVariable Integer sort,
-            @PathVariable Integer gender,
+            @PathVariable String gender,
             @PathVariable Integer type,
-            @PathVariable Integer severity) {
+            @PathVariable String severity) {
 
         StringBuilder sqlStatement = new StringBuilder("SELECT e FORM Emergency e WHERE 1=1");
         if (gender != null) {
@@ -134,7 +134,7 @@ public class EmergencyController {
 
     @PutMapping("")
     public ResponseEntity<String> editEmergency(@RequestBody Emergency editEmergency) {
-        if (emergencyrepository.existsById(editEmergency.getEmergency_Case_Id())) {
+        if (emergencyrepository.existsById(editEmergency.getEmergencyCaseId())) {
             emergencyrepository.save(editEmergency);
             // Add logic Emerforeachcase
             for(SymptomEmgForEachCase i : editEmergency.getSymptomEmgForEachCase()){
