@@ -25,8 +25,7 @@ public class EmergencyService {
     public void addSympandEmerid (emergency newEmergency){
 
         //call generateNextid
-        String Emr_id = generateNextId();
-        newEmergency.setEmergencyCaseId(Emr_id);
+  
   
         for(symptomemgforeachcase i : newEmergency.getSymptomEmgForEachCase()){
             symptomemgforeachcase Sort = new symptomemgforeachcase();
