@@ -10,5 +10,6 @@ import java.util.List;
 public interface NormalCaseRepository extends CrudRepository<normalcase, String> {
     normalcase findByCaseId(String caseId);
     List<normalcase> findAll();
+    List<normalcase> findByPatient_HN(Integer HN);
 }
 

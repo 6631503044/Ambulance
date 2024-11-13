@@ -28,4 +28,10 @@ public class NormalCaseController {
     public void addNormalCase(@RequestBody normalcase normalcase) {
         normalCaseService.addNormalCase(normalcase);
     }
+
+    @GetMapping("/{HN}")
+    public List<normalcase> getNormalCaseByHN(@PathVariable Integer HN) {
+        return normalCaseRepository.findByPatient_HN(HN);
+    }
 }
+
