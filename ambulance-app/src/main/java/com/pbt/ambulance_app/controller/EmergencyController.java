@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pbt.ambulance_app.repository.SymptomListRepository;
 import com.pbt.ambulance_app.model.age;
-import com.pbt.ambulance_app.model.area;
 import com.pbt.ambulance_app.model.emergency;
 import com.pbt.ambulance_app.model.patientstatus;
 import com.pbt.ambulance_app.model.patienttype;
@@ -37,6 +37,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -99,6 +100,7 @@ public class EmergencyController {
         Integer patientStatus = (Integer) Emer.get("patientStatus");
         Integer area = (Integer) Emer.get("area");
 
+        
         // set Emergency
         emergency newcase = new emergency();
         String Emr_id = emergencyservice.generateNextId();
@@ -127,7 +129,7 @@ public class EmergencyController {
     // map
     // I will add the filter later
     @GetMapping("/{page}/{sort}/{gender}/{type}/{severity}")
-    public List<emergency> getAllEmergency(
+    public ResponseEntity<List<emergency>> getAllEmergency(
             @PathVariable Integer page,
             @PathVariable Integer sort,
             @PathVariable String gender,
@@ -183,7 +185,7 @@ public class EmergencyController {
         query.setFirstResult((page - 1) * pageSize);
         query.setMaxResults(pageSize);
         Insert = query.getResultList();
-        return Insert;
+        return new ResponseEntity<List<emergency>>(Insert, HttpStatus.OK);
 
     }
 
@@ -202,4 +204,13 @@ public class EmergencyController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmergency(@PathVariable String id){
+        if(emergencyrepository.existsById(id)){
+            emergencyrepository.deleteById(id);
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Emergency case not found", HttpStatus.NOT_FOUND);
+        }
+    }
 }
