@@ -11,29 +11,27 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 
 @Entity
-public class normalcase {
+public class appointment {
     @Id
-    @Column (name = "case_Id")
+    @Column (name = "case_Id", length = 50)
     private String caseId;
     @Column (name = "pickup_Time")
     private LocalTime pickupTime;
     @Column (name = "pickup_Date")
     private LocalDate pickupDate;
+    @Column (name = "description", length = 255)
     private String description;
-    @Column(name = "coordinate_long_and_lat", columnDefinition = "float")
-    private double coordinateLongAndLat;
+    @Column (name = "coordinate_long_and_lat", length = 30)
+    private String coordinateLongAndLat;
+    @Column (name = "location", length = 100)
     private String location;
-    @Column (name = "ambulance_Status")
+    @Column (name = "ambulance_Status", length = 50)
     private String ambulanceStatus;
 
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "HN")
     private com.pbt.ambulance_app.model.patient patient;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_Type_Id")
-    private patienttype patientType;
 
     public String getCaseId() {
         return caseId;
@@ -67,14 +65,6 @@ public class normalcase {
         this.description = description;
     }
 
-    public Double getCoordinateLongAndLat() {
-        return coordinateLongAndLat;
-    }
-
-    public void setCoordinateLongAndLat(Double coordinateLongAndLat) {
-        this.coordinateLongAndLat = coordinateLongAndLat;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -99,11 +89,11 @@ public class normalcase {
         this.patient = patient;
     }
 
-    public patienttype getPatientType() {
-        return patientType;
+    public String getCoordinateLongAndLat() {
+        return coordinateLongAndLat;
     }
 
-    public void setPatientType(patienttype patientType) {
-        this.patientType = patientType;
+    public void setCoordinateLongAndLat(String coordinateLongAndLat) {
+        this.coordinateLongAndLat = coordinateLongAndLat;
     }
 }

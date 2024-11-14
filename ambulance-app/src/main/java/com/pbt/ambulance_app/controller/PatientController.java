@@ -38,8 +38,6 @@ public class PatientController {
     private PatientTypeRepository patientTypeRepository;
     @Autowired
     private AgeRepository ageRepository;
-    @Autowired
-    private AreaRepository areaRepository;
 
     // It's need these 4 parameter to make it work
     @GetMapping("/{page}/{filter}/{gender}/{type}")
@@ -168,11 +166,11 @@ public class PatientController {
             }
 
             // Example for area
-            Integer areaId = (Integer) newPatientData.get("areaId");
-            if (areaId != null) {
-                area area = areaRepository.findById(areaId).orElse(null);
-                newPatient.setArea(area);
-            }
+           // Integer areaId = (Integer) newPatientData.get("areaId");
+           // if (areaId != null) {
+           //     area area = areaRepository.findById(areaId).orElse(null);
+           //     newPatient.setArea(area);
+           // }
 
             // Save the new patient and return 201 Created message
             patientrepo.save(newPatient);

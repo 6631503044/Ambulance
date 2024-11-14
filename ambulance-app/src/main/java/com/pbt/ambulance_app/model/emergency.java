@@ -14,41 +14,41 @@ import java.util.List;
 @Entity
 public class emergency {
     @Id
-    @Column (name = "emergency_Case_Id")
+    @Column (name = "emergency_Case_Id", length = 50)
     private String emergencyCaseId;
+    @Column (name = "severity", length = 50)
     private String severity;
-    @Column (name = "emg_Description")
+    @Column (name = "emg_Description", length = 255)
     private String emgDescription;
-    @Column (name = "emg_Coordinate_long_and_lat")
-    private Double emgCoordinateLongAndLat;
-    @Column (name = "emg_Location")
+    @Column (name = "emg_coordinate_long_and_lat", length = 30)
+    private String emgCoordinateLongAndLat;
+    @Column (name = "emg_Location", length = 100)
     private String emgLocation;
-    @Column (name = "phone_Number")
+    @Column (name = "phone_Number", length = 15)
     private String phoneNumber;
+    @Column (name = "gender", length = 10)
     private String gender;
     @Column (name = "emg_Day")
     private LocalDate emgDay;
     @Column (name = "emg_Time")
     private LocalTime emgTime;
+    @Column (name = "area", length = 10)
+    private String area;
 
     @ManyToOne
-    @JoinColumn(name = "age Id")
+    @JoinColumn(name = "age_Id")
     private age age;
 
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
     private List<symptomemgforeachcase> symptomEmgForEachCase;
 
     @ManyToOne
-    @JoinColumn(name = "patient_Type_Id")
-    private patienttype patientType;
-
-    @ManyToOne
     @JoinColumn(name = "patient_Status_Id")
     private patientstatus patientStatus;
 
     @ManyToOne
-    @JoinColumn(name = "area id")
-    private area area;
+    @JoinColumn(name = "emerpatient_Type_Id")
+    private emerpatienttype emerpatientType;
 
     public String getSeverity() {
         return severity;
@@ -66,14 +66,6 @@ public class emergency {
         this.gender = gender;
     }
 
-    public patienttype getPatientType() {
-        return patientType;
-    }
-
-    public void setPatientType(patienttype patientType) {
-        this.patientType = patientType;
-    }
-
     public patientstatus getPatientStatus() {
         return patientStatus;
     }
@@ -88,14 +80,6 @@ public class emergency {
 
     public void setSymptomEmgForEachCase(List<symptomemgforeachcase> symptomEmgForEachCase) {
         this.symptomEmgForEachCase = symptomEmgForEachCase;
-    }
-
-    public area getArea() {
-        return area;
-    }
-
-    public void setArea(area area) {
-        this.area = area;
     }
 
     public String getEmergencyCaseId() {
@@ -120,14 +104,6 @@ public class emergency {
 
     public void setEmgDescription(String emgDescription) {
         this.emgDescription = emgDescription;
-    }
-
-    public Double getEmgCoordinateLongAndLat() {
-        return emgCoordinateLongAndLat;
-    }
-
-    public void setEmgCoordinateLongAndLat(Double emgCoordinateLongAndLat) {
-        this.emgCoordinateLongAndLat = emgCoordinateLongAndLat;
     }
 
     public String getEmgLocation() {
@@ -160,5 +136,29 @@ public class emergency {
 
     public void setEmgTime(LocalTime emgTime) {
         this.emgTime = emgTime;
+    }
+
+    public emerpatienttype getEmerpatientType() {
+        return emerpatientType;
+    }
+
+    public void setEmerpatientType(emerpatienttype emerpatientType) {
+        this.emerpatientType = emerpatientType;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getEmgCoordinateLongAndLat() {
+        return emgCoordinateLongAndLat;
+    }
+
+    public void setEmgCoordinateLongAndLat(String emgCoordinateLongAndLat) {
+        this.emgCoordinateLongAndLat = emgCoordinateLongAndLat;
     }
 }

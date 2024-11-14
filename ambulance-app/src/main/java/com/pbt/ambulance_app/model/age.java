@@ -7,7 +7,7 @@ public class age {
     @Id
     @Column(name = "age_Id")
     private Integer ageId;
-    @Column (name = "age_Range")
+    @Column (name = "age_Range", length = 50)
     private String ageRange;
 
     public Integer getAgeId() {

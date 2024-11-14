@@ -8,18 +8,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pbt.ambulance_app.repository.SymptomListRepository;
-import com.pbt.ambulance_app.model.age;
 import com.pbt.ambulance_app.model.emergency;
-import com.pbt.ambulance_app.model.patientstatus;
-import com.pbt.ambulance_app.model.patienttype;
 import com.pbt.ambulance_app.repository.AgeRepository;
-import com.pbt.ambulance_app.repository.AreaRepository;
 import com.pbt.ambulance_app.repository.EmergencyRepository;
 import com.pbt.ambulance_app.repository.PatientStatusRepository;
 import com.pbt.ambulance_app.repository.PatientTypeRepository;
@@ -27,13 +22,7 @@ import com.pbt.ambulance_app.service.EmergencyService;
 import com.pbt.ambulance_app.model.symptomemgforeachcase;
 import com.pbt.ambulance_app.repository.SymptomEmgForEachCaseRepository;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
@@ -61,8 +50,6 @@ public class EmergencyController {
     EmergencyRepository emergencyrepository;
     @Autowired
     PatientStatusRepository patientStatusRepository;
-    @Autowired
-    AreaRepository areaRepository;
 
     @Autowired
     PatientTypeRepository patienttype;
@@ -109,16 +96,15 @@ public class EmergencyController {
         newcase.setAge(ageRepository.findByAgeId(age));
         newcase.setSeverity(severity);
         newcase.setEmgDescription(emgDescription);
-        newcase.setEmgCoordinateLongAndLat(emgCoordinateLongAndLat);
+        //newcase.setEmgCoordinateLongAndLat(emgCoordinateLongAndLat);
         newcase.setEmgLocation(emgLocation);
         newcase.setPhoneNumber(phoneNumber);
         newcase.setGender(gender);
         newcase.setEmgDay(emgDay);
         newcase.setEmgTime(emgTime);
         newcase.setSymptomEmgForEachCase(symptomEmgForEachCase);
-        newcase.setPatientType(patienttype.findByPatientTypeId(patientType));
+        //newcase.setPatientType(patienttype.findByPatientTypeId(patientType));
         newcase.setPatientStatus(patientStatusRepository.findByPatientStatusId(patientStatus));
-        newcase.setArea(areaRepository.findByAreaId(area));
 
         // Add to Symptom type for eachcase table
         emergencyservice.addSympandEmerid(newcase);
